@@ -41,43 +41,44 @@
 			player = this.physics.add.image(400, 300, 'block'); // Add the block into the world.
 			player.setCollideWorldBounds(true); // Set the collision of the block to true.
 
-			var Bullet = new Phaser.Class({
-				Extends: Phaser.GameObjects.Image,
+			var Bullet = new Phaser.Class({ // Create a new bulletclass.
+				Extends: Phaser.GameObjects.Image, // Inherits from image.
 				initialize:
-				function Bullet(scene)
+				function Bullet(scene) // Constructor
 				{
-					Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
-					this.scaleX = 0.25;
-					this.scaleY = 0.25;
-					this.speed = Phaser.Math.GetSpeed(600, 1);
+					Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet'); //Image to use.
+					this.scaleX = 0.25; // Scale the bullet down.
+					this.scaleY = 0.25; // Scale the bullet down.
+					this.speed = Phaser.Math.GetSpeed(600, 1); // Speed of the bullet.
 				},
 
-				fire: function(x, y)
+				fire: function(x, y) // Fire function.
 				{
-					this.setPosition(x, y);
-					this.setActive(true);
-					this.setVisible(true);
+					this.setPosition(x, y); // Position of the bullet.
+					this.setActive(true); // Set the bullet to be active.
+					this.setVisible(true); // Set the bullet to be visible.
 				},
 
 				update: function(time, delta)
 				{
-					this.x += this.speed * delta;
-					if(this.x > 820)
+					this.x += this.speed * delta; // Speed it goes along the x axis. Uses delta time to make it smooth.
+					if(this.x > 820) // If the bullet goes off the screen 
 					{
+						// Delete it
 						this.setActive(false);
 						this.setVisible(false);
 					}
 				}
 			});
 
-			bullets = this.add.group({
-				classType: Bullet,
-				maxSize: 30,
-				runChildUpdate: true
+			bullets = this.add.group({ // Make a group.
+				classType: Bullet, // Use the bullet.
+				maxSize: 30, // Max size of the group.
+				runChildUpdate: true // Run child updates.
 			});
 
 
-			spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+			spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // Spacebar input.
 
 		}
 
@@ -102,12 +103,12 @@
         		player.setVelocityY(300);
     		}
 
-    		if(Phaser.Input.Keyboard.JustDown(spacebar))
+    		if(Phaser.Input.Keyboard.JustDown(spacebar)) // If the spacebar is pressed.
     		{
-    			var bullet = bullets.get();
+    			var bullet = bullets.get(); // Create a bullet.
     			if(bullet)
     			{
-    				bullet.fire(player.x, player.y);
+    				bullet.fire(player.x, player.y); // Fire it.
     			}
     		}
 
