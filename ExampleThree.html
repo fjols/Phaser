@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src = "https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
+	<script>
+		var config = {
+			type: Phaser.AUTO,
+			width: 800, // Width of the game screen.
+			height: 600, // Height of the game screen.
+			backgroundColor: '#0072bc', // Background colour (Blue).
+			physics: { // Physics to use
+				default: 'arcade',
+				arcade:{
+					gravity: {y: 200}
+				}
+			},
+			scene:{ // Functions to use in the scene.
+				preload: preload,
+				create: create,
+				update: update
+			}
+		};
+
+		var player; // Player.
+		var cursors; // Cursor keys variable (Up, Down, Left, Right).
+		var game = new Phaser.Game(config); // Game instance.
+
+		function preload()
+		{
+			this.load.image('block', 'assets/textures/block.jpg'); // Preload the block image.
+		}
+
+		function create()
+		{
+			cursors = this.input.keyboard.createCursorKeys(); // Create the cursor keys.
+			player = this.physics.add.image(400, 300, 'block'); // Add the block into the world.
+			player.setCollideWorldBounds(true); // Set the collision of the block to true.
+		}
+
+		function update()
+		{
+			player.setVelocity(0); // If nothing is pressed don't add any velocity to the player.
+    		if (cursors.left.isDown) // Left input
+    		{
+    	  		player.setVelocityX(-300);
+   			}
+    		else if (cursors.right.isDown) // Right input
+    		{
+    	    	player.setVelocityX(300);
+   	 		}
+
+    		if (cursors.up.isDown) // Down input
+    		{
+        		player.setVelocityY(-300);
+    		}
+    		else if (cursors.down.isDown) // Up input
+    		{
+        		player.setVelocityY(300);
+    		}
+		}
+
+	</script>
+</body>
+</html>
