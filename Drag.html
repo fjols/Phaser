@@ -26,20 +26,20 @@
 
     function preload ()
     {
-    	this.load.image('card', 'assets/textures/card.png');
+    	this.load.image('card', 'assets/textures/card.png'); // Load the image of the card.
     }
 
     function create ()
     {
-    	var image = this.add.sprite(400, 300, 'card').setInteractive();
-        image.scaleX = 0.5;
-        image.scaleY = 0.5;
-        this.input.setDraggable(image);
-        this.input.dragDistanceThreshold = 16;
+    	var image = this.add.sprite(400, 300, 'card').setInteractive(); // Create the card and make it interactable.
+        image.scaleX = 0.5; // Scale the image on the X.
+        image.scaleY = 0.5; // Scake the image on the Y.
+        this.input.setDraggable(image); // Make the image draggable.
+        this.input.dragDistanceThreshold = 16; // Drag distance threshold.
         
-        this.input.on('drag', function(pointer, gameObject, dragX, dragY){
-            gameObject.x = dragX;
-            gameObject.y = dragY;
+        this.input.on('drag', function(pointer, gameObject, dragX, dragY){ // Dragging function
+            gameObject.x = dragX; // Update the position.
+            gameObject.y = dragY; // Update the position.
         });
 
     }
