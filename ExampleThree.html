@@ -13,7 +13,7 @@
 			physics: { // Physics to use
 				default: 'arcade',
 				arcade:{
-					gravity: {y: 200}
+					gravity: {y: 0}
 				}
 			},
 			scene:{ // Functions to use in the scene.
@@ -25,11 +25,14 @@
 
 		var player; // Player.
 		var cursors; // Cursor keys variable (Up, Down, Left, Right).
+		var spacebar;
+		var bullets;
 		var game = new Phaser.Game(config); // Game instance.
 
 		function preload()
 		{
 			this.load.image('block', 'assets/textures/block.jpg'); // Preload the block image.
+			this.load.image('bullet', 'assets/textures/particle.png');
 		}
 
 		function create()
@@ -37,6 +40,45 @@
 			cursors = this.input.keyboard.createCursorKeys(); // Create the cursor keys.
 			player = this.physics.add.image(400, 300, 'block'); // Add the block into the world.
 			player.setCollideWorldBounds(true); // Set the collision of the block to true.
+
+			var Bullet = new Phaser.Class({
+				Extends: Phaser.GameObjects.Image,
+				initialize:
+				function Bullet(scene)
+				{
+					Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
+					this.scaleX = 0.25;
+					this.scaleY = 0.25;
+					this.speed = Phaser.Math.GetSpeed(600, 1);
+				},
+
+				fire: function(x, y)
+				{
+					this.setPosition(x, y);
+					this.setActive(true);
+					this.setVisible(true);
+				},
+
+				update: function(time, delta)
+				{
+					this.x += this.speed * delta;
+					if(this.x > 820)
+					{
+						this.setActive(false);
+						this.setVisible(false);
+					}
+				}
+			});
+
+			bullets = this.add.group({
+				classType: Bullet,
+				maxSize: 30,
+				runChildUpdate: true
+			});
+
+
+			spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
 		}
 
 		function update()
@@ -59,6 +101,16 @@
     		{
         		player.setVelocityY(300);
     		}
+
+    		if(Phaser.Input.Keyboard.JustDown(spacebar))
+    		{
+    			var bullet = bullets.get();
+    			if(bullet)
+    			{
+    				bullet.fire(player.x, player.y);
+    			}
+    		}
+
 		}
 
 	</script>
