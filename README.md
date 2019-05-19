@@ -1,2 +1,3 @@
 # Phaser
-phaser js work
+This repo is for projects I create using Phaser JS.
+https://phaser.io/
