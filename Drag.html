@@ -18,10 +18,13 @@
         },
         scene: { // Functions to use in this scene.
             preload: preload,
-            create: create
+            create: create,
+            update: update
         }
     };
 
+    var text; // Text variable.
+    var image; // The card.
     var game = new Phaser.Game(config); // Game instance.
 
     function preload ()
@@ -31,11 +34,13 @@
 
     function create ()
     {
-    	var image = this.add.sprite(400, 300, 'card').setInteractive(); // Create the card and make it interactable.
+    	image = this.add.sprite(400, 300, 'card').setInteractive(); // Create the card and make it interactable.
         image.scaleX = 0.5; // Scale the image on the X.
         image.scaleY = 0.5; // Scale the image on the Y.
         this.input.setDraggable(image); // Make the image draggable.
         this.input.dragDistanceThreshold = 16; // Drag distance threshold.
+
+        text = this.add.text(30, 30, ''); // Add text to the screen.
 
         this.input.on('drag', function(pointer, gameObject, dragX, dragY){ // Dragging function
             gameObject.x = dragX; // Update the position.
@@ -53,8 +58,13 @@
         this.input.on('pointerup', function(pointer){ // Clear the tint when the cursor is lifted off the image.
             image.clearTint(); // Clear tint function.
         });
-
     }
+
+    function update()
+    {
+        text.setText('X: ' + image.x + ' Y:' + image.y); // Update the text.
+    }
+
     </script>
 
 </body>
