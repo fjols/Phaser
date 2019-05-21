@@ -42,6 +42,18 @@
             gameObject.y = dragY; // Update the position.
         });
 
+        this.input.on('pointerdown', function(pointer){ // Set the tint when the cursor clicks on the image.
+            image.setTint(0xff0000); // Red tint.
+        });
+
+        this.input.on('pointerout', function(pointer){ // Clear the tint when the cursor is out of the image.
+            image.clearTint(); // Clear tint function.
+        });
+
+        this.input.on('pointerup', function(pointer){ // Clear the tint when the cursor is lifted off the image.
+            image.clearTint(); // Clear tint function.
+        });
+
     }
     </script>
 
