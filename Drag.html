@@ -23,6 +23,10 @@
         }
     };
 
+    var point;
+    var pointTwo;
+    var graphics;
+    var angle = 0;
     var text; // Text variable.
     var image; // The card.
     var game = new Phaser.Game(config); // Game instance.
@@ -58,11 +62,30 @@
         this.input.on('pointerup', function(pointer){ // Clear the tint when the cursor is lifted off the image.
             image.clearTint(); // Clear tint function.
         });
+
+        graphics = this.add.graphics({lineStyle: {width: 2, color: 0x2266aa}});
+        point = new Phaser.Math.Vector2(250, 0);
+        pointTwo = new Phaser.Math.Vector2(150, 0);
+
     }
 
     function update()
     {
-        text.setText('X: ' + image.x + ' Y:' + image.y); // Update the text.
+        graphics.clear();
+        angle += 0.005;  // Angle to add to the points.
+        point.setTo(Math.cos(angle) * 250, Math.sin(angle) * 250); // Set the vector.
+        pointTwo.setTo(Math.cos(-angle) * 250, Math.sin(-angle) * 250); // Set the other vector.
+        graphics.lineBetween(400, 400, 400 + point.x, 300 + point.y);
+        graphics.lineStyle(2, 0x00aa00);
+        graphics.lineBetween(400, 300, 400 + pointTwo.x, 300 + pointTwo.y);
+
+        var cross = point.cross(pointTwo); // Cross product of the two vectors.
+        var area = point.length() * pointTwo.length(); // Area of the two vectors
+        var angleBetweenPoints = Math.asin(cross / area); // Angle between the points.
+
+        text.setText(['X: ' + image.x + ' Y:' + image.y,
+                      'Cross Product: ' + cross,
+                      'Angle between Points: ' + angleBetweenPoints].join('\n')); // Update the text.
     }
 
     </script>
