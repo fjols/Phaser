@@ -45,7 +45,7 @@
 			cursors = this.input.keyboard.createCursorKeys(); // Create the cursor keys.
 			player = this.physics.add.sprite(400, 300, 'block'); // Add the block into the world.
 			player.setCollideWorldBounds(true); // Set the collision of the block to true.
-			
+			player.setTint(0xff00ff, 0xffff00, 0x0000f, 0xff0ef0);
 
 
 			var Bullet = new Phaser.Class({ // Create a new bulletclass.
@@ -69,7 +69,7 @@
 				update: function(time, delta)
 				{
 					this.x += this.speed * delta; // Speed it goes along the x axis. Uses delta time to make it smooth.
-					if(this.x > 820) // If the bullet goes off the screen 
+					if(this.x > 820) // If the bullet goes off the screen
 					{
 						// Delete it
 						this.setActive(false);
