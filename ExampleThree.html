@@ -33,6 +33,7 @@
 		function preload()
 		{
 			this.load.image('block', 'assets/textures/block.jpg'); // Preload the block image.
+			this.load.image('ship', 'assets/textures/ship.png');
 			this.load.image('bg', 'assets/textures/space.jpg');
 			this.load.image('bullet', 'assets/textures/particle.png');
 		}
@@ -43,7 +44,7 @@
 			this.add.image(400, 300, 'bg');
 
 			cursors = this.input.keyboard.createCursorKeys(); // Create the cursor keys.
-			player = this.physics.add.sprite(400, 300, 'block'); // Add the block into the world.
+			player = this.physics.add.sprite(400, 300, 'ship'); // Add the block into the world.
 			player.setCollideWorldBounds(true); // Set the collision of the block to true.
 			player.setTint(0xff00ff, 0xffff00, 0x0000f, 0xff0ef0);
 
