@@ -26,7 +26,7 @@
     var sin;
     function preload ()
     {
-        this.load.image('block', 'assets/textures/block.jpg');
+        this.load.image('block', 'assets/textures/block.jpg'); // Preload the block image
     }
 
     function create ()
@@ -44,7 +44,7 @@
         var i = 0;
 
         blocks.children.iterate(function(child){
-          this.tweens.add({
+          this.tweens.add({ // Add the tween to all the blocks
             targets: child,
             scaleX: 1,
             scaleY: 1,
