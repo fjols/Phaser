@@ -33,12 +33,12 @@
     {
         var blocks = this.add.group({ key: 'block', repeat: 107, setScale: {x: 0.3, y: 0.3}});
         Phaser.Actions.GridAlign(blocks.getChildren(),{
-          width: 12,
-          height: 10,
-          cellWidth: 60,
-          cellHeight: 60,
-          x: 70,
-          y: 60
+          width: 12, // Width.
+          height: 10, // Height.
+          cellWidth: 60, // Width of the cell.
+          cellHeight: 60, // Height of the cell.
+          x: 70, // x.
+          y: 60 // y.
         });
 
         var i = 0;
@@ -46,11 +46,11 @@
         blocks.children.iterate(function(child){
           this.tweens.add({ // Add the tween to all the blocks
             targets: child,
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 1, // Scale on the x.
+            scaleY: 1, // Scale on the y.
             ease: 'Sine.easeInOut',
-            duration: 300,
-            delay: i * 50,
+            duration: 300, // Duration of the tween.
+            delay: i * 50, // The delay.
             repeat: -1,
             yoyo: true
           });
