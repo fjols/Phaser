@@ -45,7 +45,7 @@
       a += 0.005;
 
       point.x = 400 - Math.cos(a) * 400;
-      point.y = 300 - Math.sin(a * 4) * 300;
+      point.y = 300 - Math.sin(a * 4) - Math.cos(a * 2) * 300;
 
       for(var i = 0; i < points.length; i++)
       {
